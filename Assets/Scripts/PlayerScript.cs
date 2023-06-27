@@ -7,13 +7,27 @@ public class PlayerScript : MonoBehaviour, IMoveable, IControlable
     [Header("Stats")]
     [SerializeField] private float moveSpeed = 0.1f;
     [SerializeField] private float distanceMoveAgain = 0.1f;
+    [SerializeField] private int detik;
     [Header("References")]
+    [SerializeField] private IMoveable moveable;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private LayerMask wallLayer;
     private Vector3 moveTarget;
     private Vector3 moveDirectionBuffer = Vector3.zero;
     private float distanceToTarget;
 
+    [ContextMenu("Ini Method Baru")]
+    /// <summary>
+    /// Ini method baru 
+    /// </summary>
+    /// <param name="number">Ini parameter number</param>
+    /// <param name="angka">Ini parameter angka</param>
+    /// <returns>return apa ini</returns>    
+    public void MethodBaru()
+    {
+        Debug.Log($"{detik/3600}:{(detik%3600)/60}:{detik%60}");
+    }
+    
     private void Start()
     {
         moveTarget = transform.position;
@@ -22,6 +36,7 @@ public class PlayerScript : MonoBehaviour, IMoveable, IControlable
 
     private void Update()
     {
+
         if (!gameManager.CanMove) return;
 
         distanceToTarget = Vector3.Distance(transform.position, moveTarget);
@@ -39,6 +54,12 @@ public class PlayerScript : MonoBehaviour, IMoveable, IControlable
 
     private void FixedUpdate()
     {
+        detik++;
+        if (detik > 300)
+        {
+            Debug.Log("Sudah 5 detik");
+        }
+
         if (distanceToTarget > 0)
         {
             MovePosition();

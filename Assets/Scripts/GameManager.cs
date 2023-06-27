@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         canMove = false;
+
+        Screen.SetResolution(Screen.width, Screen.width / 16 * 9, true);
     }
 
     void Update()
@@ -20,6 +22,11 @@ public class GameManager : MonoBehaviour
         {
             canMove = true;
             tutorialText.SetActive(false);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 
